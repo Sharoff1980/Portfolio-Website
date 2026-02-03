@@ -375,7 +375,6 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.1);
   margin: 0 auto;
   transition: all 0.3s ease;
-  cursor: pointer;
 }
 
 .video-container:hover {
@@ -388,6 +387,99 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.enlarge-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0, 245, 255, 0.9);
+  color: #000000;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 245, 255, 0.4);
+}
+
+.enlarge-btn:hover {
+  background: rgba(0, 245, 255, 1);
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 245, 255, 0.6);
+}
+
+.enlarge-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Video Modal */
+.video-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-modal-content video {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 25px 80px rgba(0, 245, 255, 0.3);
+  border: 3px solid rgba(0, 245, 255, 0.5);
+}
+
+.close-modal {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.close-modal:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: rotate(90deg);
 }
 
 .video-info {
@@ -960,6 +1052,11 @@ body {
               <source src="./New folder/SaveVid.Net_AQM1TEmnLOUKoAGYnlljp50WaJ_ko86_PVJqkNAtRrESINPPqSmnZa7s10DmdrpHgK99HwvWoCMOnZQnFvyVryea2zJA4MQFYWc3lms.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
+            <button class="enlarge-btn" onclick="openVideoModal(this)">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+              </svg>
+            </button>
           </div>
           <div class="video-info">
             <h3 class="video-title">Brand Story Revolution</h3>
@@ -986,6 +1083,11 @@ body {
               <source src="./New folder/pop.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
+            <button class="enlarge-btn" onclick="openVideoModal(this)">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+              </svg>
+            </button>
           </div>
           <div class="video-info">
             <h3 class="video-title">Social Proof That Converts</h3>
@@ -1012,6 +1114,11 @@ body {
               <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
+            <button class="enlarge-btn" onclick="openVideoModal(this)">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+              </svg>
+            </button>
           </div>
           <div class="video-info">
             <h3 class="video-title">Viral Product Launch</h3>
@@ -1031,6 +1138,19 @@ body {
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal" onclick="closeVideoModal(event)">
+    <div class="video-modal-content">
+      <button class="close-modal" onclick="closeVideoModal(event)">×</button>
+      <video id="modalVideo" controls autoplay>
+        <source id="modalVideoSource" src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
     </div>
   </section>
 
@@ -1330,6 +1450,60 @@ body {
       }, { threshold: 0.5 });
       
       observer.observe(video.parentElement);
+    });
+
+    // Video Modal Functions
+    function openVideoModal(button) {
+      event.stopPropagation();
+      const videoContainer = button.closest('.video-container');
+      const video = videoContainer.querySelector('video');
+      const videoSrc = video.querySelector('source').src;
+      
+      const modal = document.getElementById('videoModal');
+      const modalVideo = document.getElementById('modalVideo');
+      const modalVideoSource = document.getElementById('modalVideoSource');
+      
+      // Pause the small video
+      video.pause();
+      
+      // Set the modal video source and play
+      modalVideoSource.src = videoSrc;
+      modalVideo.load();
+      modalVideo.play();
+      
+      // Show modal
+      modal.classList.add('active');
+      
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal(event) {
+      // Only close if clicking the overlay or close button
+      if (event.target.id === 'videoModal' || event.target.classList.contains('close-modal')) {
+        const modal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+        
+        // Pause and reset video
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+        
+        // Hide modal
+        modal.classList.remove('active');
+        
+        // Re-enable body scroll
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('videoModal');
+        if (modal.classList.contains('active')) {
+          closeVideoModal({ target: modal });
+        }
+      }
     });
 
     // Smooth scroll for navigation links
