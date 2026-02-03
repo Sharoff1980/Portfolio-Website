@@ -347,112 +347,93 @@ body {
   letter-spacing: 1px;
 }
 
-/* Video Comparison Styles */
-.video-comparisons-grid {
+/* Video Showcase Styles */
+.video-showcase-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 40px;
   margin-top: 40px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.video-comparison-wrapper {
+.video-showcase-item {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-.comparison-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: #ffffff;
-}
-
-.comparison-desc {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 15px;
-  line-height: 1.4;
-}
-
-.video-compare-container {
+.video-container {
   position: relative;
   width: 100%;
-  max-width: 280px;
+  max-width: 320px;
   aspect-ratio: 9/16;
   border-radius: 16px;
   overflow: hidden;
-  cursor: ew-resize;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
   border: 2px solid rgba(255, 255, 255, 0.1);
   margin: 0 auto;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.video-base {
-  position: absolute;
-  top: 0;
-  left: 0;
+.video-container:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 245, 255, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 245, 255, 0.3);
+}
+
+.video-container video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.video-clipper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  overflow: hidden;
-  width: 50%;
+.video-info {
+  text-align: center;
+  padding: 0 10px;
 }
 
-.video-clipped {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  object-fit: cover;
-  width: 200%;
+.video-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #ffffff;
 }
 
-.divider-line {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 3px;
-  background: linear-gradient(180deg, #00f5ff, #ff00f5);
-  z-index: 10;
-  transform: translateX(-50%);
-  pointer-events: none;
-  left: 50%;
+.video-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
 }
 
-.divider-handle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.video-stats {
   display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.video-stat {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 3px;
 }
 
-.handle-circle {
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid #00f5ff;
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
-}
-
-.handle-arrow {
+.video-stat-value {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 24px;
+  font-weight: 700;
   color: #00f5ff;
-  font-size: 16px;
-  text-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+}
+
+.video-stat-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Image Grid */
@@ -806,7 +787,7 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .video-comparisons-grid {
+  .video-showcase-grid {
     grid-template-columns: 1fr;
   }
 
@@ -966,77 +947,85 @@ body {
         </svg>
         9:00 AM - Content Creation Process
       </div>
-      <h2 class="section-title">Before & After: Content That Converts</h2>
+      <h2 class="section-title">Content That Explodes</h2>
       <p class="section-description">
-        See the dramatic transformation in content quality. Move your mouse to compare the old approach vs. my optimized strategy.
+        Here's why these videos performed exceptionally well and drove massive engagement.
       </p>
 
-      <div class="video-comparisons-grid">
-        <!-- Video Comparison 1 -->
-        <div class="video-comparison-wrapper">
-          <h3 class="comparison-title">Video Campaign #1: Brand Story</h3>
-          <p class="comparison-desc">Transformed a generic product showcase into an emotional brand story that increased views.</p>
-          <div class="video-compare-container" data-comparison="1">
-            <video class="video-base" loop muted playsinline>
-             <source src="./New folder/SaveVid.Net_AQM1TEmnLOUKoAGYnlljp50WaJ_ko86_PVJqkNAtRrESINPPqSmnZa7s10DmdrpHgK99HwvWoCMOnZQnFvyVryea2zJA4MQFYWc3lms.mp4" type="video/mp4">
-
+      <div class="video-showcase-grid">
+        <!-- Video 1 -->
+        <div class="video-showcase-item">
+          <div class="video-container">
+            <video loop muted playsinline controls>
+              <source src="./New folder/SaveVid.Net_AQM1TEmnLOUKoAGYnlljp50WaJ_ko86_PVJqkNAtRrESINPPqSmnZa7s10DmdrpHgK99HwvWoCMOnZQnFvyVryea2zJA4MQFYWc3lms.mp4" type="video/mp4">
+              Your browser does not support the video tag.
             </video>
-            <div class="video-clipper">
-              <video class="video-clipped" loop muted playsinline>
-                <source src="./New folder/pop.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="divider-line">
-              <div class="divider-handle">
-                <div class="handle-arrow left">◀</div>
-                <div class="handle-circle"></div>
-                <div class="handle-arrow right">▶</div>
+          </div>
+          <div class="video-info">
+            <h3 class="video-title">Brand Story Revolution</h3>
+            <p class="video-description">
+              Transformed a generic product showcase into an emotional brand story by focusing on customer pain points and aspirations. The authentic storytelling approach created immediate connection.
+            </p>
+            <div class="video-stats">
+              <div class="video-stat">
+                <div class="video-stat-value">400%</div>
+                <div class="video-stat-label">View Increase</div>
+              </div>
+              <div class="video-stat">
+                <div class="video-stat-value">2.5M</div>
+                <div class="video-stat-label">Impressions</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Video Comparison 2 -->
-        <div class="video-comparison-wrapper">
-          <h3 class="comparison-title">Video Campaign #2: Customer Testimonial</h3>
-          <p class="comparison-desc">Turned raw testimonials into compelling social proof that drove 3x more conversions</p>
-          <div class="video-compare-container" data-comparison="2">
-            <video class="video-base" loop muted playsinline>
-              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+        <!-- Video 2 -->
+        <div class="video-showcase-item">
+          <div class="video-container">
+            <video loop muted playsinline controls>
+              <source src="./New folder/pop.mp4" type="video/mp4">
+              Your browser does not support the video tag.
             </video>
-            <div class="video-clipper">
-              <video class="video-clipped" loop muted playsinline>
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="divider-line">
-              <div class="divider-handle">
-                <div class="handle-arrow left">◀</div>
-                <div class="handle-circle"></div>
-                <div class="handle-arrow right">▶</div>
+          </div>
+          <div class="video-info">
+            <h3 class="video-title">Social Proof That Converts</h3>
+            <p class="video-description">
+              Turned raw customer testimonials into compelling social proof using dynamic editing, text overlays, and strategic pacing. Real voices, real impact.
+            </p>
+            <div class="video-stats">
+              <div class="video-stat">
+                <div class="video-stat-value">3x</div>
+                <div class="video-stat-label">Conversions</div>
+              </div>
+              <div class="video-stat">
+                <div class="video-stat-value">89%</div>
+                <div class="video-stat-label">Watch Time</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Video Comparison 3 -->
-        <div class="video-comparison-wrapper">
-          <h3 class="comparison-title">Video Campaign #3: Product Launch</h3>
-          <p class="comparison-desc">Reimagined product launches with cinematic storytelling that went viral</p>
-          <div class="video-compare-container" data-comparison="3">
-            <video class="video-base" loop muted playsinline>
-              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+        <!-- Video 3 -->
+        <div class="video-showcase-item">
+          <div class="video-container">
+            <video loop muted playsinline controls>
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
+              Your browser does not support the video tag.
             </video>
-            <div class="video-clipper">
-              <video class="video-clipped" loop muted playsinline>
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="divider-line">
-              <div class="divider-handle">
-                <div class="handle-arrow left">◀</div>
-                <div class="handle-circle"></div>
-                <div class="handle-arrow right">▶</div>
+          </div>
+          <div class="video-info">
+            <h3 class="video-title">Viral Product Launch</h3>
+            <p class="video-description">
+              Reimagined product launches with cinematic storytelling and strategic teaser campaigns. Built anticipation through multi-stage reveals that kept audiences engaged.
+            </p>
+            <div class="video-stats">
+              <div class="video-stat">
+                <div class="video-stat-value">5.2M</div>
+                <div class="video-stat-label">Views</div>
+              </div>
+              <div class="video-stat">
+                <div class="video-stat-value">25K</div>
+                <div class="video-stat-label">Shares</div>
               </div>
             </div>
           </div>
@@ -1327,156 +1316,20 @@ body {
       else timeElement.textContent = '9:00 PM';
     });
 
-    // Video Comparison Functionality
-    document.querySelectorAll('.video-compare-container').forEach(container => {
-      const videoBase = container.querySelector('.video-base');
-      const videoClipped = container.querySelector('.video-clipped');
-      const clipper = container.querySelector('.video-clipper');
-      const dividerLine = container.querySelector('.divider-line');
+    // Simple Video Showcase
+    document.querySelectorAll('.video-container video').forEach(video => {
+      // Autoplay muted videos when they come into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            video.play().catch(e => console.log('Autoplay prevented:', e));
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.5 });
       
-      let isHovering = false;
-      let isComparisonActive = false; // For mobile tap mode
-
-      // Ensure videos autoplay muted on load
-      videoBase.muted = true;
-      videoClipped.muted = true;
-      videoBase.play().catch(e => console.log('Autoplay prevented:', e));
-      videoClipped.play().catch(e => console.log('Autoplay prevented:', e));
-
-      function handleMove(e) {
-        // Only work if hovering (desktop) or comparison is active (mobile)
-        if (!isHovering && !isComparisonActive) return;
-
-        const rect = container.getBoundingClientRect();
-        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        const position = ((clientX - rect.left) / rect.width) * 100;
-
-        if (position >= 0 && position <= 100) {
-          clipper.style.width = position + '%';
-          videoClipped.style.width = ((100 / position) * 100) + '%';
-          dividerLine.style.left = position + '%';
-
-          // Audio control - only when hovering
-          if (position > 50) {
-            videoBase.muted = true;
-            videoClipped.muted = false;
-          } else if (position < 50) {
-            videoBase.muted = false;
-            videoClipped.muted = true;
-          } else {
-            videoBase.muted = false;
-            videoClipped.muted = false;
-          }
-        }
-      }
-
-      function resetPosition() {
-        // Reset to 50% when not hovering/active
-        clipper.style.width = '50%';
-        videoClipped.style.width = '200%';
-        dividerLine.style.left = '50%';
-        videoBase.muted = true;
-        videoClipped.muted = true;
-      }
-
-      function handleClick() {
-        // Toggle audio on click
-        const bothMuted = videoBase.muted && videoClipped.muted;
-        
-        if (bothMuted) {
-          // Unmute based on current position
-          const currentPosition = parseFloat(clipper.style.width);
-          if (currentPosition > 50) {
-            videoClipped.muted = false;
-            videoBase.muted = true;
-          } else {
-            videoBase.muted = false;
-            videoClipped.muted = true;
-          }
-        } else {
-          // Mute both
-          videoBase.muted = true;
-          videoClipped.muted = true;
-        }
-
-        // Sync playback
-        if (videoBase.paused) {
-          videoBase.play();
-          videoClipped.play();
-        }
-        videoBase.currentTime = videoClipped.currentTime;
-      }
-
-      // Mouse enter - enable comparison and play videos
-      container.addEventListener('mouseenter', function() {
-        isHovering = true;
-        videoBase.play().catch(e => console.log('Play prevented:', e));
-        videoClipped.play().catch(e => console.log('Play prevented:', e));
-      });
-
-      // Mouse leave - disable comparison, pause videos, and reset
-      container.addEventListener('mouseleave', function() {
-        isHovering = false;
-        if (!isComparisonActive) {
-          videoBase.pause();
-          videoClipped.pause();
-          videoBase.muted = true;
-          videoClipped.muted = true;
-          resetPosition();
-        }
-      });
-
-      // Mouse move - only works when hovering
-      container.addEventListener('mousemove', handleMove);
-
-      // Click for audio toggle
-      container.addEventListener('click', handleClick);
-
-      // Mobile: Double-tap to toggle comparison mode
-      let tapCount = 0;
-      let tapTimer = null;
-      
-      container.addEventListener('touchstart', function(e) {
-        tapCount++;
-        
-        if (tapCount === 1) {
-          tapTimer = setTimeout(() => {
-            tapCount = 0;
-          }, 300);
-        } else if (tapCount === 2) {
-          clearTimeout(tapTimer);
-          tapCount = 0;
-          
-          // Toggle comparison mode
-          isComparisonActive = !isComparisonActive;
-          
-          if (isComparisonActive) {
-            // Add visual indicator for active mode
-            container.style.borderColor = 'rgba(0, 245, 255, 0.6)';
-            container.style.boxShadow = '0 0 30px rgba(0, 245, 255, 0.4)';
-            videoBase.play();
-            videoClipped.play();
-          } else {
-            // Reset visual and position
-            container.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-            container.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.5)';
-            videoBase.pause();
-            videoClipped.pause();
-            resetPosition();
-          }
-        }
-      });
-
-      // Touch move - only works when comparison is active
-      container.addEventListener('touchmove', function(e) {
-        if (isComparisonActive) {
-          e.preventDefault(); // Prevent scrolling when comparing
-          handleMove(e);
-        }
-      });
-
-      // Initialize at 50%
-      resetPosition();
+      observer.observe(video.parentElement);
     });
 
     // Smooth scroll for navigation links
