@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name - Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #00f5ff, #ff00f5, #f5ff00);
+      z-index: 9999;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.6);
+      width: 0%;
+    }
+
+    /* Navigation */
+    .nav-container {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      animation: slideDown 0.8s ease;
+    }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 12px 30px;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link:hover {
+      color: #00f5ff;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00f5ff, #ff00f5);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Time Badge */
+    .time-badge {
+      position: fixed;
+      top: 100px;
+      right: 30px;
+      background: rgba(0, 245, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 14px;
+      color: #00f5ff;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    .time-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 50px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 245, 0.1) 0%, transparent 50%);
+      animation: bgShift 20s ease infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 1200px;
+    }
+
+    .hero-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(0, 245, 255, 0.5);
+      margin: 0 auto 30px;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(0, 245, 255, 0.3);
+      object-fit: cover;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(60px, 10vw, 120px);
+      font-weight: 800;
+      background: linear-gradient(135deg, #00f5ff, #ff00f5, #f5ff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease 0.2s both;
+      line-height: 1.1;
+      letter-spacing: -2px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease 0.4s both;
+      letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      animation: fadeInUp 1s ease 0.6s both;
+    }
+
+    .scroll-indicator {
+      margin-top: 60px;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      width: 30px;
+      height: 50px;
+      border: 2px solid rgba(0, 245, 255, 0.5);
+      border-radius: 20px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .scroll-arrow::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: #00f5ff;
+      border-radius: 50%;
+      animation: scrollDot 2s infinite;
+    }
+
+    /* Section Styles */
+    .section {
+      min-height: 100vh;
+      padding: 120px 50px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-content {
+      max-width: 1400px;
+      width: 100%;
+      animation: fadeInUp 1s ease;
+    }
+
+    .section-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 245, 255, 0.1);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 14px;
+      color: #00f5ff;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-description {
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 60px;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .stat-card:hover::before {
+      left: 100%;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0, 245, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(255, 0, 245, 0.2));
+      border-radius: 15px;
+    }
+
+    .stat-value {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 42px;
+      font-weight: 700;
+      color: #00f5ff;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Video Comparison Styles */
+    .video-comparisons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-top: 40px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .video-comparison-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comparison-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .comparison-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .video-compare-container {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 9/16;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: ew-resize;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      margin: 0 auto;
+    }
+
+    .video-base {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-clipper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      overflow: hidden;
+      width: 50%;
+    }
+
+    .video-clipped {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      object-fit: cover;
+      width: 200%;
+    }
+
+    .divider-line {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: linear-gradient(180deg, #00f5ff, #ff00f5);
+      z-index: 10;
+      transform: translateX(-50%);
+      pointer-events: none;
+      left: 50%;
+    }
+
+    .divider-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .handle-circle {
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00f5ff;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+    }
+
+    .handle-arrow {
+      color: #00f5ff;
+      font-size: 16px;
+      text-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+    }
+
+    /* Image Grid */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .image-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .image-card:hover {
+      transform: scale(1.05);
+      border-color: rgba(0, 245, 255, 0.3);
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+      padding: 30px 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .image-card:hover .image-overlay {
+      transform: translateY(0);
+    }
+
+    .image-overlay h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+
+    .image-overlay p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Conversion Story */
+    .conversion-container {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 60px;
+      margin-top: 40px;
+    }
+
+    .conversion-screenshot {
+      max-width: 800px;
+      margin: 40px auto;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid rgba(0, 245, 255, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 245, 255, 0.2);
+    }
+
+    .conversion-screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .conversion-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .conversion-stat {
+      text-align: center;
+    }
+
+    .conversion-stat-value {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 48px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #00f5ff, #ff00f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .conversion-stat-label {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Personalized Section */
+    .personalized-section {
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(255, 0, 245, 0.1));
+      border: 2px solid rgba(0, 245, 255, 0.3);
+      border-radius: 30px;
+      padding: 80px 60px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .personalized-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, #00f5ff, #ff00f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .personalized-content {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ideas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .idea-card {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .idea-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0, 245, 255, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+    }
+
+    .idea-number {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(0, 245, 255, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .idea-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .idea-description {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 80px 50px 40px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-text {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #00f5ff, #ff00f5);
+      color: #000000;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 18px 50px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+      margin-bottom: 60px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 245, 255, 0.5);
+    }
+
+    .footer-bottom {
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .progress-text {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes scrollDot {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes bgShift {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(5deg);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .section {
+        padding: 80px 30px;
+      }
+
+      .hero-section {
+        padding: 0 30px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-comparisons-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .conversion-container {
+        padding: 40px 30px;
+      }
+
+      .personalized-section {
+        padding: 50px 30px;
+      }
+
+      .ideas-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        padding: 60px 30px 30px;
+      }
+
+      .time-badge {
+        top: 80px;
+        right: 20px;
+      }
+
+      .glass-nav {
+        padding: 10px 20px;
+        gap: 15px;
+      }
+
+      .nav-link {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navigation -->
+  <div class="nav-container">
+    <nav class="glass-nav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#morning" class="nav-link">Morning</a>
+      <a href="#content" class="nav-link">Content</a>
+      <a href="#crisis" class="nav-link">Crisis</a>
+      <a href="#campaign" class="nav-link">Campaign</a>
+      <a href="#results" class="nav-link">Results</a>
+    </nav>
+  </div>
+
+  <!-- Time Badge -->
+  <div class="time-badge">
+    <svg class="time-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    <span id="currentTime">6:00 AM</span>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <img 
+        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop" 
+        alt="Profile" 
+        class="hero-image"
+      />
+      <h1 class="hero-name">Your Name</h1>
+      <h2 class="hero-tagline">Watch me turn a struggling brand into a trending topic in 24 hours</h2>
+      <p class="hero-subtitle">
+        Social Media Strategist • Content Creator • Growth Hacker • Brand Storyteller
+      </p>
+      <div class="scroll-indicator">
+        <div class="scroll-text">Scroll to Begin Journey</div>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 AM - Morning Analytics -->
+  <section id="morning" class="section">
+    <div class="section-content">
+      <div class="section-time">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        6:00 AM - Morning Analytics Review
+      </div>
+      <h2 class="section-title">Starting the Day with Data</h2>
+      <p class="section-description">
+        Every great day starts with understanding where we are. Here's how I transformed the metrics that matter.
+      </p>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="32" height="32" fill="none" stroke="#00f5ff" viewBox="0 0 24 24">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <div class="stat-value">+245%</div>
+          <div class="stat-label">Engagement Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="32" height="32" fill="none" stroke="#ff00f5" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="stat-value">50K+</div>
+          <div class="stat-label">New Followers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="32" height="32" fill="none" stroke="#f5ff00" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
+          <div class="stat-value">3.2M</div>
+          <div class="stat-label">Impressions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="32" height="32" fill="none" stroke="#00f5ff" viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="7"></circle>
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+            </svg>
+          </div>
+          <div class="stat-value">89%</div>
+          <div class="stat-label">Click-Through Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 AM - Content Creation (Video Comparison) -->
+  <section id="content" class="section">
+    <div class="section-content">
+      <div class="section-time">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        9:00 AM - Content Creation Process
+      </div>
+      <h2 class="section-title">Before & After: Content That Converts</h2>
+      <p class="section-description">
+        See the dramatic transformation in content quality. Move your mouse to compare the old approach vs. my optimized strategy.
+      </p>
+
+      <div class="video-comparisons-grid">
+        <!-- Video Comparison 1 -->
+        <div class="video-comparison-wrapper">
+          <h3 class="comparison-title">Video Campaign #1: Brand Story</h3>
+          <p class="comparison-desc">Transformed a generic product showcase into an emotional brand story that increased views.</p>
+          <div class="video-compare-container" data-comparison="1">
+            <video class="video-base" loop autoplay muted playsinline>
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+            </video>
+            <div class="video-clipper">
+              <video class="video-clipped" loop autoplay muted playsinline>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="divider-line">
+              <div class="divider-handle">
+                <div class="handle-arrow left">◀</div>
+                <div class="handle-circle"></div>
+                <div class="handle-arrow right">▶</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Comparison 2 -->
+        <div class="video-comparison-wrapper">
+          <h3 class="comparison-title">Video Campaign #2: Customer Testimonial</h3>
+          <p class="comparison-desc">Turned raw testimonials into compelling social proof that drove 3x more conversions</p>
+          <div class="video-compare-container" data-comparison="2">
+            <video class="video-base" loop autoplay muted playsinline>
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+            </video>
+            <div class="video-clipper">
+              <video class="video-clipped" loop autoplay muted playsinline>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="divider-line">
+              <div class="divider-handle">
+                <div class="handle-arrow left">◀</div>
+                <div class="handle-circle"></div>
+                <div class="handle-arrow right">▶</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Comparison 3 -->
+        <div class="video-comparison-wrapper">
+          <h3 class="comparison-title">Video Campaign #3: Product Launch</h3>
+          <p class="comparison-desc">Reimagined product launches with cinematic storytelling that went viral</p>
+          <div class="video-compare-container" data-comparison="3">
+            <video class="video-base" loop autoplay muted playsinline>
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4">
+            </video>
+            <div class="video-clipper">
+              <video class="video-clipped" loop autoplay muted playsinline>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="divider-line">
+              <div class="divider-handle">
+                <div class="handle-arrow left">◀</div>
+                <div class="handle-circle"></div>
+                <div class="handle-arrow right">▶</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 PM - Crisis Management -->
+  <section id="crisis" class="section">
+    <div class="section-content">
+      <div class="section-time">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        12:00 PM - Crisis Management
+      </div>
+      <h2 class="section-title">Turning Problems into Opportunities</h2>
+      <p class="section-description">
+        A customer complaint went viral. Here's how I turned it into our best PR moment of the year.
+      </p>
+
+      <div class="conversion-container">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 20px; color: #ffffff;">
+            The Viral Complaint That Changed Everything
+          </h3>
+          <p style="font-size: 18px; color: rgba(255, 255, 255, 0.7); line-height: 1.8;">
+            When a customer's complaint about our product went viral with 50K shares, most brands would panic. 
+            Instead, I crafted a response that acknowledged the issue, showed our human side, and offered a solution 
+            that turned critics into advocates. The result? Our most successful week ever.
+          </p>
+        </div>
+
+        <div class="conversion-stats">
+          <div class="conversion-stat">
+            <div class="conversion-stat-value">2.5M</div>
+            <div class="conversion-stat-label">People Reached</div>
+          </div>
+          <div class="conversion-stat">
+            <div class="conversion-stat-value">95%</div>
+            <div class="conversion-stat-label">Positive Sentiment</div>
+          </div>
+          <div class="conversion-stat">
+            <div class="conversion-stat-value">500%</div>
+            <div class="conversion-stat-label">Sales Increase</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 PM - Campaign Launch (Images Made) -->
+  <section id="campaign" class="section">
+    <div class="section-content">
+      <div class="section-time">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        3:00 PM - Campaign Launch
+      </div>
+      <h2 class="section-title">Visual Content That Stops Scrolls</h2>
+      <p class="section-description">
+        Every image tells a story. Here's a showcase of campaigns that broke through the noise.
+      </p>
+
+      <div class="image-grid">
+        <div class="image-card">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=711&fit=crop" alt="Campaign 1" />
+          <div class="image-overlay">
+            <h4>Summer Launch Campaign</h4>
+            <p>2M+ impressions, 15% CTR</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=711&fit=crop" alt="Campaign 2" />
+          <div class="image-overlay">
+            <h4>Analytics Dashboard Redesign</h4>
+            <p>Featured in 10+ industry blogs</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=711&fit=crop" alt="Campaign 3" />
+          <div class="image-overlay">
+            <h4>Brand Awareness Drive</h4>
+            <p>500K+ shares, 20% engagement</p>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=711&fit=crop" alt="Campaign 4" />
+          <div class="image-overlay">
+            <h4>Product Spotlight Series</h4>
+            <p>Generated $250K in direct sales</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 PM - Engagement Session -->
+  <section class="section">
+    <div class="section-content">
+      <div class="section-time">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        6:00 PM - Engagement Session
+      </div>
+      <h2 class="section-title">The Art of Community Building</h2>
+      <p class="section-description">
+        Great content creates conversations. Here's how I turn followers into a thriving community.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="32" height="32" fill="none" stroke="#00f5ff" viewBox="0 0 24 24">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div class="stat-value">1,200+</div>
+          <div class="stat-label">Daily Interactions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="32" height="32" fill="none" stroke="#ff00f5" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="stat-value">94%</div>
+          <div class="stat-label">Response Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="32" height="32" fill="none" stroke="#f5ff00" viewBox="0 0 24 24">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <div class="stat-value">< 2min</div>
+          <div class="stat-label">Avg Response Time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 PM - Results Dashboard (Conversion Story) -->
+  <section id="results" class="section">
+    <div class="section-content">
+      <div class="section-time">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        9:00 PM - Results Dashboard
+      </div>
+      <h2 class="section-title">The Numbers Don't Lie</h2>
+      <p class="section-description">
+        After 15 hours of strategic execution, here's what we achieved. Real results from real campaigns.
+      </p>
+
+      <div class="conversion-container">
+        <div class="conversion-screenshot">
+          <img 
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop" 
+            alt="Conversion Dashboard"
+          />
+        </div>
+
+        <div class="conversion-stats">
+          <div class="conversion-stat">
+            <div class="conversion-stat-value">847%</div>
+            <div class="conversion-stat-label">ROI Increase</div>
+          </div>
+          <div class="conversion-stat">
+            <div class="conversion-stat-value">$125K</div>
+            <div class="conversion-stat-label">Revenue Generated</div>
+          </div>
+          <div class="conversion-stat">
+            <div class="conversion-stat-value">32%</div>
+            <div class="conversion-stat-label">Conversion Rate</div>
+          </div>
+          <div class="conversion-stat">
+            <div class="conversion-stat-value">4.8x</div>
+            <div class="conversion-stat-label">Sales Multiplier</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center;">
+          <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+            These aren't just numbers—they represent real business growth, real customers reached, 
+            and real impact on brand perception. This is what happens when strategy meets execution.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personalized Section -->
+  <section class="section">
+    <div class="section-content">
+      <div class="personalized-section">
+        <h2 class="personalized-title">Hi [Your Company Name]! 👋</h2>
+        <div class="personalized-content">
+          <p>
+            I've been following your brand, and I'm impressed by what you're building. After researching 
+            your recent campaigns and social media presence, I've identified three opportunities that could 
+            take your content strategy to the next level.
+          </p>
+        </div>
+
+        <div class="ideas-grid">
+          <div class="idea-card">
+            <div class="idea-number">01</div>
+            <h3 class="idea-title">Story-Driven Product Launches</h3>
+            <p class="idea-description">
+              Transform your product announcements into episodic content series that builds anticipation 
+              and keeps your audience engaged throughout the launch cycle. Expected impact: 3x engagement rate.
+            </p>
+          </div>
+          <div class="idea-card">
+            <div class="idea-number">02</div>
+            <h3 class="idea-title">User-Generated Content Strategy</h3>
+            <p class="idea-description">
+              Leverage your community's creativity with a branded hashtag campaign that showcases real 
+              customer experiences. This builds trust and provides endless authentic content. Expected: 5x organic reach.
+            </p>
+          </div>
+          <div class="idea-card">
+            <div class="idea-number">03</div>
+            <h3 class="idea-title">Behind-the-Scenes Content Hub</h3>
+            <p class="idea-description">
+              Create a dedicated content stream showing your team, process, and company culture. 
+              Humanizing your brand builds deeper connections. Expected: 40% increase in brand loyalty metrics.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h2 class="footer-title">What's Next?</h2>
+      <p class="footer-text">
+        This portfolio is just the beginning of what we can achieve together. My mission is to help brands 
+        find their authentic voice, build genuine communities, and create content that doesn't just get views—it 
+        gets results. Whether you're looking to revamp your social strategy, launch a viral campaign, or build 
+        a content engine that consistently delivers, I'm ready to bring my A-game to your team.
+      </p>
+      <a href="mailto:your.email@example.com" class="cta-button">
+        Let's Create Something Amazing
+      </a>
+      <div class="footer-bottom">
+        <p>© 2026 Your Name. All rights reserved.</p>
+        <p class="progress-text" id="progressText">
+          You've made it 0% through understanding why I'm your next hire! 🚀
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Scroll Progress and Time Update
+    window.addEventListener('scroll', function() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrolled = (window.scrollY / documentHeight) * 100;
+      
+      document.getElementById('progressBar').style.width = scrolled + '%';
+      document.getElementById('progressText').textContent = 
+        "You've made it " + Math.round(scrolled) + "% through understanding why I'm your next hire! 🚀";
+
+      // Update time based on scroll
+      const timeElement = document.getElementById('currentTime');
+      if (scrolled < 15) timeElement.textContent = '6:00 AM';
+      else if (scrolled < 30) timeElement.textContent = '9:00 AM';
+      else if (scrolled < 45) timeElement.textContent = '12:00 PM';
+      else if (scrolled < 60) timeElement.textContent = '3:00 PM';
+      else if (scrolled < 75) timeElement.textContent = '6:00 PM';
+      else timeElement.textContent = '9:00 PM';
+    });
+
+    // Video Comparison Functionality
+    document.querySelectorAll('.video-compare-container').forEach(container => {
+      const videoBase = container.querySelector('.video-base');
+      const videoClipped = container.querySelector('.video-clipped');
+      const clipper = container.querySelector('.video-clipper');
+      const dividerLine = container.querySelector('.divider-line');
+
+      function handleMove(e) {
+        const rect = container.getBoundingClientRect();
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const position = ((clientX - rect.left) / rect.width) * 100;
+
+        if (position >= 0 && position <= 100) {
+          clipper.style.width = position + '%';
+          videoClipped.style.width = ((100 / position) * 100) + '%';
+          dividerLine.style.left = position + '%';
+
+          // Audio control
+          if (position > 50) {
+            videoBase.muted = true;
+            videoClipped.muted = false;
+          } else if (position < 50) {
+            videoBase.muted = false;
+            videoClipped.muted = true;
+          } else {
+            videoBase.muted = false;
+            videoClipped.muted = false;
+          }
+        }
+      }
+
+      function handleClick() {
+        if (videoBase.paused) {
+          videoBase.play();
+          videoClipped.play();
+        } else {
+          videoBase.pause();
+          videoClipped.pause();
+        }
+        videoBase.currentTime = videoClipped.currentTime;
+      }
+
+      container.addEventListener('mousemove', handleMove);
+      container.addEventListener('touchmove', handleMove);
+      container.addEventListener('click', handleClick);
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
