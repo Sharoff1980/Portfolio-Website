@@ -389,6 +389,108 @@ body {
   object-fit: cover;
 }
 
+.video-container video::-webkit-media-controls {
+  display: none !important;
+}
+
+.video-container video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+.video-container video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+.video-container video::-moz-media-controls {
+  display: none !important;
+}
+
+/* Show controls only in modal */
+#modalVideo::-webkit-media-controls {
+  display: flex !important;
+}
+
+#modalVideo::-webkit-media-controls-enclosure {
+  display: flex !important;
+}
+
+#modalVideo::-webkit-media-controls-panel {
+  display: flex !important;
+}
+
+#modalVideo::-moz-media-controls {
+  display: flex !important;
+}
+
+/* Custom Video Controls Styling */
+video::-webkit-media-controls-panel {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+
+video::-webkit-media-controls-play-button {
+  background-color: rgba(0, 245, 255, 0.8);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+video::-webkit-media-controls-play-button:hover {
+  background-color: rgba(0, 245, 255, 1);
+}
+
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+  color: #00f5ff;
+  text-shadow: 0 0 5px rgba(0, 245, 255, 0.5);
+  font-family: 'Space Grotesk', monospace;
+}
+
+video::-webkit-media-controls-timeline {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 6px;
+}
+
+video::-webkit-media-controls-timeline::-webkit-slider-thumb {
+  background: #00f5ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+}
+
+video::-webkit-media-controls-volume-slider {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 6px;
+}
+
+video::-webkit-media-controls-volume-slider::-webkit-slider-thumb {
+  background: #00f5ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+}
+
+video::-webkit-media-controls-mute-button {
+  filter: brightness(0) saturate(100%) invert(71%) sepia(97%) saturate(2663%) hue-rotate(157deg) brightness(102%) contrast(101%);
+}
+
+video::-webkit-media-controls-fullscreen-button {
+  filter: brightness(0) saturate(100%) invert(71%) sepia(97%) saturate(2663%) hue-rotate(157deg) brightness(102%) contrast(101%);
+}
+
+/* Firefox */
+video::-moz-range-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 6px;
+}
+
+video::-moz-range-thumb {
+  background: #00f5ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+  border: none;
+}
+
 .enlarge-btn {
   position: absolute;
   bottom: 15px;
@@ -1048,7 +1150,7 @@ body {
         <!-- Video 1 -->
         <div class="video-showcase-item">
           <div class="video-container">
-            <video loop muted playsinline controls>
+            <video loop muted playsinline>
               <source src="./New folder/SaveVid.Net_AQM1TEmnLOUKoAGYnlljp50WaJ_ko86_PVJqkNAtRrESINPPqSmnZa7s10DmdrpHgK99HwvWoCMOnZQnFvyVryea2zJA4MQFYWc3lms.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1079,7 +1181,7 @@ body {
         <!-- Video 2 -->
         <div class="video-showcase-item">
           <div class="video-container">
-            <video loop muted playsinline controls>
+            <video loop muted playsinline>
               <source src="./New folder/pop.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -1110,7 +1212,7 @@ body {
         <!-- Video 3 -->
         <div class="video-showcase-item">
           <div class="video-container">
-            <video loop muted playsinline controls>
+            <video loop muted playsinline>
               <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
